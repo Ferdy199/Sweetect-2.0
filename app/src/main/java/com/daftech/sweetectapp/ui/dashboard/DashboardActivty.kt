@@ -38,7 +38,7 @@ class DashboardActivty : AppCompatActivity() {
             }
         }
 
-        binding.galleryCardView.setOnClickListener {
+        binding.btnGallery.setOnClickListener {
             when(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
                 PackageManager.PERMISSION_GRANTED -> {
                     val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -53,7 +53,7 @@ class DashboardActivty : AppCompatActivity() {
 
         }
 
-        binding.scanCardView.setOnClickListener {
+        binding.btnScan.setOnClickListener {
             when(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)){
                 PackageManager.PERMISSION_GRANTED -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
