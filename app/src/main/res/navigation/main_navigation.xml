@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment2">
+    <fragment
+        android:id="@+id/splashFragment2"
+        android:name="com.daftech.sweetectapp.ui.onboarding.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment2_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/splashFragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment2_to_dashboardActivty"
+            app:destination="@id/dashboardActivty"
+            app:popUpTo="@id/splashFragment2"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/baseActivity"
+        android:name="com.daftech.sweetectapp.ui.base.BaseActivity"
+        android:label="activity_base"
+        tools:layout="@layout/activity_base" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.daftech.sweetectapp.ui.onboarding.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_dashboardActivty"
+            app:destination="@id/dashboardActivty"
+            app:popUpTo="@id/viewPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.daftech.sweetectapp.ui.detail.DetailActivity"
+        android:label="activity_detail"
+        tools:layout="@layout/activity_detail" >
+    </activity>
+    <activity
+        android:id="@+id/dashboardActivty"
+        android:name="com.daftech.sweetectapp.ui.dashboard.DashboardActivty"
+        android:label="activity_dashboard"
+        tools:layout="@layout/activity_dashboard" />
+
+</navigation>
