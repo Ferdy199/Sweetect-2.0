@@ -33,8 +33,8 @@ class FoodRepository private constructor(private val localDataSource: LocalDataS
                 val foodList = ArrayList<FoodData>()
                 for ( response in foodResponses ){
                     val food = FoodData(
-                        response.calorie,
                         response.labels,
+                        response.calorie,
                         response.sugar
                     )
                     foodList.add(food)
