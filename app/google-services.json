@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "206838633666",
+    "firebase_url": "https://sweetect-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sweetect",
+    "storage_bucket": "sweetect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206838633666:android:405c5ef8661520cb11175b",
+        "android_client_info": {
+          "package_name": "com.daftech.sweetectapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206838633666-5go7gpsd5gdnf23r3n2q7q9ktsjtgipg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkFBTVKz9wFIuguj15TdQi111H6Z8qwvY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206838633666-5go7gpsd5gdnf23r3n2q7q9ktsjtgipg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

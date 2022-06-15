@@ -1,18 +1,22 @@
 package com.daftech.sweetectapp.core.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.daftech.sweetectapp.core.data.FoodData
+import com.daftech.sweetectapp.core.data.DataHistory
+import com.daftech.sweetectapp.core.repository.FoodRepository
 import com.daftech.sweetectapp.core.utils.FirebaseHistoryDiffCallback
 import com.daftech.sweetectapp.databinding.ItemHistoryBinding
 
-class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>(){
+class HistoryAdapter(private val uid: String, private val context: Context): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>(){
 
-    private var listHistory = ArrayList<FoodData>()
+    private val listHistory = ArrayList<DataHistory>()
+    private val foodRepository: FoodRepository? = null
 
-    fun setListHistory(listHistory: List<FoodData>){
+    fun setListHistory(listHistory: List<DataHistory>){
         val diffCallback = FirebaseHistoryDiffCallback(this.listHistory, listHistory)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
@@ -38,11 +42,19 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>(){
     }
 
     inner class HistoryViewHolder(private val binding: ItemHistoryBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(history: FoodData){
+        fun bind(history: DataHistory){
             with(binding){
+                tvItemDate.text = history.date
                 tvItemTitle.text = history.labels
                 tvItemCalorie.text = history.calorie
                 tvItemSugar.text = history.sugar
+
+                if (history.id != null){
+                    btnDelete.setOnClickListener {
+                        foodRepository?.deleteFirebase(history.id!!, uid, context)
+                        Log.d("isi Id", history.id!!)
+                    }
+                }
             }
         }
     }

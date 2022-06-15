@@ -8,19 +8,26 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.daftech.sweetectapp.core.data.DataHistory
+import com.daftech.sweetectapp.core.utils.DateHelper
 import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDetailBinding
 import com.daftech.sweetectapp.ui.base.BaseActivity
+import com.daftech.sweetectapp.ui.dashboard.DashboardActivty
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.firebase.auth.FirebaseAuth
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var bitmap: Bitmap
+    private lateinit var firebaseAuth: FirebaseAuth
+    private var foodHistory: DataHistory? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        val id = firebaseAuth.currentUser?.uid
+        foodHistory = DataHistory()
+
 
         //viewModel
         val factory = ViewModelFactory.getInstance(this)
@@ -62,12 +74,21 @@ class DetailActivity : AppCompatActivity() {
 
                     btnPredicted.visibility = View.GONE
                     btnSelectTake.visibility = View.VISIBLE
+                    btnSave.visibility = View.VISIBLE
 
 
                     //sugar chart
                     sugarChart.visibility = View.VISIBLE
                     progbar.visibility = View.GONE
                     sugarChart(food.sugar)
+
+                    //add to food history
+                    foodHistory.let {
+                        it?.date = DateHelper.getCurrentDate()
+                        it?.labels = food.labels
+                        it?.calorie = food.calorie
+                        it?.sugar = food.sugar
+                    }
                 }
             }
         }
@@ -75,6 +96,17 @@ class DetailActivity : AppCompatActivity() {
         binding.btnSelectTake.setOnClickListener {
             val intent = Intent(this, BaseActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnSave.setOnClickListener {
+            if (id != null) {
+                viewModel.insertHistoryToFirebase(foodHistory as DataHistory, id, this)
+                val intent = Intent(this, DashboardActivty::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(this, "Pengguna tidak ditemukan", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

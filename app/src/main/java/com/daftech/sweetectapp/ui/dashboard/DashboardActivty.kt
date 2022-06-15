@@ -6,20 +6,30 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.daftech.sweetectapp.ui.detail.DetailActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.daftech.sweetectapp.core.adapter.HistoryAdapter
+import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDashboardBinding
+import com.daftech.sweetectapp.ui.detail.DetailActivity
+import com.daftech.sweetectapp.ui.signin.SignInActivity
+import com.google.firebase.auth.FirebaseAuth
 import java.io.ByteArrayOutputStream
 
 class DashboardActivty : AppCompatActivity() {
     private lateinit var binding : ActivityDashboardBinding
     private lateinit var bitmap : Bitmap
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +37,13 @@ class DashboardActivty : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        historyAdapter = HistoryAdapter(firebaseAuth.currentUser!!.uid, this)
+
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
 
 
         when(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -37,6 +54,7 @@ class DashboardActivty : AppCompatActivity() {
                 checkForPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, "write storage", 102)
             }
         }
+
 
         binding.btnGallery.setOnClickListener {
             when(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
@@ -63,6 +81,26 @@ class DashboardActivty : AppCompatActivity() {
                     checkForPermissions(Manifest.permission.CAMERA, "camera", 101)
                 }
             }
+        }
+
+        viewModel.getAllFirebaseHistory(firebaseAuth.currentUser!!.uid).observe(this){ history ->
+            when{
+                history != null -> {
+                    dataNull(false)
+                    historyAdapter.setListHistory(history)
+                    Log.d("Isi Data list", history.orEmpty().isEmpty().toString())
+                }
+                else -> {
+                    dataNull(true)
+                    Log.d("Isi Data list", history.orEmpty().isEmpty().toString())
+                }
+            }
+        }
+
+        with(binding.rvHistory){
+            this.layoutManager = LinearLayoutManager(this@DashboardActivty)
+            this.setHasFixedSize(true)
+            this.adapter = historyAdapter
         }
     }
 
@@ -130,5 +168,24 @@ class DashboardActivty : AppCompatActivity() {
         }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun dataNull(state: Boolean){
+        when(state){
+            true -> {
+                binding.lottieAnimationView.visibility = View.VISIBLE
+                binding.tvNoData.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.lottieAnimationView.visibility = View.GONE
+                binding.tvNoData.visibility = View.GONE
+            }
+        }
     }
 }

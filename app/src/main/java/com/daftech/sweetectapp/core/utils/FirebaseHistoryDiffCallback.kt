@@ -1,9 +1,10 @@
 package com.daftech.sweetectapp.core.utils
 
 import androidx.recyclerview.widget.DiffUtil
+import com.daftech.sweetectapp.core.data.DataHistory
 import com.daftech.sweetectapp.core.data.FoodData
 
-class FirebaseHistoryDiffCallback(private val mOldHistory: List<FoodData>, private val mNewHistoryList: List<FoodData>): DiffUtil.Callback() {
+class FirebaseHistoryDiffCallback(private val mOldHistory: List<DataHistory>, private val mNewHistoryList: List<DataHistory>): DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return mOldHistory.size
     }
@@ -13,7 +14,7 @@ class FirebaseHistoryDiffCallback(private val mOldHistory: List<FoodData>, priva
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return mNewHistoryList[oldItemPosition] == mNewHistoryList[newItemPosition]
+        return mNewHistoryList[oldItemPosition].id == mNewHistoryList[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

@@ -35,7 +35,7 @@ class GalleryFragment : Fragment() {
                 textView2.startAnimation(animBottom)
             }
             binding.finish.setOnClickListener {
-                findNavController().navigate(R.id.action_viewPagerFragment_to_dashboardActivty)
+                findNavController().navigate(R.id.action_viewPagerFragment_to_signInActivity)
                 setOnBoardingFinish()
             }
         }
@@ -44,7 +44,7 @@ class GalleryFragment : Fragment() {
     private fun setOnBoardingFinish(){
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
-        editor.putBoolean("Finished", true)
+        editor.putBoolean("Finished", false)
         editor.apply()
     }
 

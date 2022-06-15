@@ -3,6 +3,7 @@ package com.daftech.sweetectapp.ui.onboarding
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,10 +22,12 @@ class SplashFragment : Fragment() {
 
         handler = Handler()
         handler.postDelayed({
-            if (setOnBoardingFinish()){
-                findNavController().navigate(R.id.action_splashFragment2_to_dashboardActivty)
+            if (!setOnBoardingFinish()){
+                findNavController().navigate(R.id.action_splashFragment2_to_signInActivity)
+                Log.d("Isi On Boarding", setOnBoardingFinish().toString())
             }else{
                 findNavController().navigate(R.id.action_splashFragment2_to_viewPagerFragment)
+                Log.d("Isi On Boarding", setOnBoardingFinish().toString())
             }
         }, 3000)
         return inflater.inflate(R.layout.fragment_splash, container, false)

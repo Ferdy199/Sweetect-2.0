@@ -29,7 +29,6 @@ class ViewPagerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null){
-
             val fragmentList = arrayListOf<Fragment>(
                 MeaningFragment(),
                 HowToScanFragment(),
