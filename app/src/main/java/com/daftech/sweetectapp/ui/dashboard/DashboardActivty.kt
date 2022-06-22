@@ -185,6 +185,7 @@ class DashboardActivty : AppCompatActivity() {
             else -> {
                 binding.lottieAnimationView.visibility = View.GONE
                 binding.tvNoData.visibility = View.GONE
+                binding.rvHistory.visibility = View.VISIBLE
             }
         }
     }
