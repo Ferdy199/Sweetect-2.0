@@ -16,7 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.daftech.sweetectapp.R
 import com.daftech.sweetectapp.core.adapter.HistoryAdapter
 import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDashboardBinding
@@ -30,20 +33,25 @@ class DashboardActivty : AppCompatActivity() {
     private lateinit var bitmap : Bitmap
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var viewModel: DashboardViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        itemTouchHelper.attachToRecyclerView(binding.rvHistory)
+
         supportActionBar?.hide()
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        historyAdapter = HistoryAdapter(firebaseAuth.currentUser!!.uid, this)
+        historyAdapter = HistoryAdapter()
 
         val factory = ViewModelFactory.getInstance(this)
-        val viewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
+        viewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
+
 
 
         when(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -55,46 +63,51 @@ class DashboardActivty : AppCompatActivity() {
             }
         }
 
-
-        binding.btnGallery.setOnClickListener {
-            when(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-                PackageManager.PERMISSION_GRANTED -> {
-                    val intent = Intent(Intent.ACTION_GET_CONTENT)
-                    intent.type = "image/*"
-
-                    startActivityForResult(intent, 100)
-                }
-                else -> {
-                    checkForPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, "storage", 100)
-                }
-            }
-
-        }
-
-        binding.btnScan.setOnClickListener {
-            when(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)){
-                PackageManager.PERMISSION_GRANTED -> {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, 101)
-                }
-                else -> {
-                    checkForPermissions(Manifest.permission.CAMERA, "camera", 101)
-                }
-            }
-        }
-
         viewModel.getAllFirebaseHistory(firebaseAuth.currentUser!!.uid).observe(this){ history ->
             when{
                 history != null -> {
                     dataNull(false)
                     historyAdapter.setListHistory(history)
                     Log.d("Isi Data list", history.orEmpty().isEmpty().toString())
+                    binding.rvHistory.findViewById(R.id.btn_delete)
                 }
                 else -> {
                     dataNull(true)
                     Log.d("Isi Data list", history.orEmpty().isEmpty().toString())
                 }
             }
+        }
+
+        with(binding) {
+
+            btnScan.setOnClickListener {
+                when(ContextCompat.checkSelfPermission(this@DashboardActivty, Manifest.permission.CAMERA)){
+                    PackageManager.PERMISSION_GRANTED -> {
+                        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(intent, 101)
+                    }
+                    else -> {
+                        checkForPermissions(Manifest.permission.CAMERA, "camera", 101)
+                    }
+                }
+            }
+
+            btnGallery.setOnClickListener {
+                when(ContextCompat.checkSelfPermission(this@DashboardActivty, Manifest.permission.READ_EXTERNAL_STORAGE)){
+                    PackageManager.PERMISSION_GRANTED -> {
+                        val intent = Intent(Intent.ACTION_GET_CONTENT)
+                        intent.type = "image/*"
+
+                        startActivityForResult(intent, 100)
+                    }
+                    else -> {
+                        checkForPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, "storage", 100)
+                    }
+                }
+            }
+
+            tvUsername.text = firebaseAuth.currentUser!!.email
+
         }
 
         with(binding.rvHistory){
@@ -189,4 +202,30 @@ class DashboardActivty : AppCompatActivity() {
             }
         }
     }
+
+    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback(){
+        override fun getMovementFlags(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+        ): Int {
+            return makeMovementFlags(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)
+        }
+
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder,
+        ): Boolean {
+            return true
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val swippedPosition = viewHolder.adapterPosition
+            val historyEntity = historyAdapter.getSwippedData(swippedPosition)
+            historyEntity?.let {
+                viewModel.deleteFirebase(it.id!!, firebaseAuth.currentUser!!.uid, this@DashboardActivty)
+            }
+        }
+
+    })
 }

@@ -185,8 +185,8 @@ class FoodRepository private constructor(private val localDataSource: LocalDataS
     }
 
     override fun deleteFirebase(historyId: String, uid: String, context: Context){
-        val ref = FirebaseDatabase.getInstance().getReferenceFromUrl(BuildConfig.FIREBASE_ADDRESS)
-        ref.child("Users").child(uid).child("History").child(historyId).removeValue().addOnCompleteListener{
+        val ref = FirebaseDatabase.getInstance(BuildConfig.FIREBASE_ADDRESS).getReference("Users")
+        ref.child(uid).child("History").child(historyId).removeValue().addOnCompleteListener{
             if (it.isSuccessful){
                 Toast.makeText(context, "Data berhasil dihapus", Toast.LENGTH_SHORT).show()
             }else{
