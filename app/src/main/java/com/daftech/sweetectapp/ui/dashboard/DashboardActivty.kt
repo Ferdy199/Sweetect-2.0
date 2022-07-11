@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.daftech.sweetectapp.R
 import com.daftech.sweetectapp.core.adapter.HistoryAdapter
 import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDashboardBinding
@@ -69,7 +68,6 @@ class DashboardActivty : AppCompatActivity() {
                     dataNull(false)
                     historyAdapter.setListHistory(history)
                     Log.d("Isi Data list", history.orEmpty().isEmpty().toString())
-                    binding.rvHistory.findViewById(R.id.btn_delete)
                 }
                 else -> {
                     dataNull(true)

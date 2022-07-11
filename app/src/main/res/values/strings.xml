@@ -47,6 +47,11 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="gula">Gula</string>
+    <string name="empty_field">Data Kosong</string>
+    <string name="history">History</string>
+    <string name="galery">Galery</string>
+    <string name="txt_welcome">Welcome To Sweetect</string>
+    <string name="txt_username">Username</string>
 
 
 </resources>

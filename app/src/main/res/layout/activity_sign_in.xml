@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="SIGN IN TO CONTINUE"
         android:textSize="16sp"
+        android:fontFamily="@font/muli"
         app:layout_constraintBottom_toTopOf="@+id/emailLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type your Email"
+            android:fontFamily="@font/muli"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type Your Password"
+            android:fontFamily="@font/muli"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,6 +91,7 @@
         android:text="Sign In"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:fontFamily="@font/muli"
         app:layout_constraintBottom_toBottomOf="@id/tv_toSignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +103,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="Not Registered Yet , Sign Up !"
+        android:fontFamily="@font/muli"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
