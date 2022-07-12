@@ -2,10 +2,8 @@ package com.daftech.sweetectapp.core.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.daftech.sweetectapp.core.data.DataHistory
-import com.daftech.sweetectapp.core.utils.FirebaseHistoryDiffCallback
 import com.daftech.sweetectapp.databinding.ItemHistoryBinding
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>(){
@@ -13,12 +11,10 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>(){
     private val listHistory = ArrayList<DataHistory>()
 
     fun setListHistory(listHistory: List<DataHistory>){
-        val diffCallback = FirebaseHistoryDiffCallback(this.listHistory, listHistory)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
 
         this.listHistory.clear()
         this.listHistory.addAll(listHistory)
-        diffResult.dispatchUpdatesTo(this)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
