@@ -9,25 +9,33 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.daftech.sweetectapp.R
 import com.daftech.sweetectapp.core.adapter.HistoryAdapter
 import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDashboardBinding
 import com.daftech.sweetectapp.ui.detail.DetailActivity
+import com.daftech.sweetectapp.ui.main.MainActivity
+import com.daftech.sweetectapp.ui.onboarding.ViewPagerFragment
 import com.daftech.sweetectapp.ui.signin.SignInActivity
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.io.ByteArrayOutputStream
 
-class DashboardActivty : AppCompatActivity() {
+class DashboardActivty : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding : ActivityDashboardBinding
     private lateinit var bitmap : Bitmap
     private lateinit var firebaseAuth: FirebaseAuth
@@ -42,7 +50,7 @@ class DashboardActivty : AppCompatActivity() {
 
         itemTouchHelper.attachToRecyclerView(binding.rvHistory)
 
-        supportActionBar?.hide()
+        setSupportActionBar(binding.toolbar)
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -51,6 +59,18 @@ class DashboardActivty : AppCompatActivity() {
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DashboardViewModel::class.java]
 
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        binding.navView.setNavigationItemSelectedListener(this)
 
 
         when(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -76,8 +96,7 @@ class DashboardActivty : AppCompatActivity() {
             }
         }
 
-        with(binding) {
-
+        binding.apply {
             btnScan.setOnClickListener {
                 when(ContextCompat.checkSelfPermission(this@DashboardActivty, Manifest.permission.CAMERA)){
                     PackageManager.PERMISSION_GRANTED -> {
@@ -226,4 +245,21 @@ class DashboardActivty : AppCompatActivity() {
         }
 
     })
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        firebaseAuth = FirebaseAuth.getInstance()
+        val title = getString(R.string.app_name)
+        when(item.itemId){
+            R.id.nav_logout -> {
+                firebaseAuth.signOut()
+                Intent(this@DashboardActivty, SignInActivity::class.java).also {
+                    it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(it)
+                }
+            }
+        }
+        supportActionBar?.title = title
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
 }

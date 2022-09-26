@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.daftech.sweetectapp.R
 import com.daftech.sweetectapp.core.data.signin.SignIn
@@ -56,6 +55,8 @@ class SignInActivity : AppCompatActivity() {
                         it?.email = email
                         it?.pass = pass
                     }
+                    binding.progbar.visibility = View.GONE
+                    binding.btnSignIn.visibility = View.VISIBLE
                 }
             }
 
@@ -67,6 +68,8 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                 }else{
                     Toast.makeText(this, "Terjadi Kesalahan", Toast.LENGTH_SHORT).show()
+                    binding.progbar.visibility = View.GONE
+                    binding.btnSignIn.visibility = View.VISIBLE
                 }
                 Log.d("Isi Data Login", signIn!!.email.toString())
                 Log.d("Isi Data bisa", signIn.state.toString())

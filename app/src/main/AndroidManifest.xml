@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SweetectApp">
-        <activity android:name=".ui.dashboard.DashboardActivty" />
+        <activity android:name=".ui.dashboard.DashboardActivty"
+            android:theme="@style/Theme.SweetectApp.NoActionBar"/>
         <activity
             android:name=".ui.base.BaseActivity"
             android:label="@string/title_activity_base"

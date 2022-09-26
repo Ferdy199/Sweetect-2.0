@@ -20,6 +20,7 @@ class SplashFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+
         handler = Handler()
         handler.postDelayed({
             if (!setOnBoardingFinish()){
@@ -35,7 +36,7 @@ class SplashFragment : Fragment() {
 
     private fun setOnBoardingFinish() : Boolean{
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        return sharedPref.getBoolean("Finished", false)
+        return sharedPref.getBoolean("Finished", true)
     }
 
 }
