@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "206838633666",
-    "firebase_url": "https://sweetect-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "sweetect",
-    "storage_bucket": "sweetect.appspot.com"
+    "project_number": "1097724406676",
+    "firebase_url": "https://sweetectapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "sweetectapp",
+    "storage_bucket": "sweetectapp.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:206838633666:android:405c5ef8661520cb11175b",
+        "mobilesdk_app_id": "1:1097724406676:android:750c782628791946087d81",
         "android_client_info": {
           "package_name": "com.daftech.sweetectapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "206838633666-5go7gpsd5gdnf23r3n2q7q9ktsjtgipg.apps.googleusercontent.com",
+          "client_id": "1097724406676-b4kf4rr3plc9c9qju8pdfh22mjlsffa9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDkFBTVKz9wFIuguj15TdQi111H6Z8qwvY"
+          "current_key": "AIzaSyC_9a5-EtfX8K1nl0LHfoULXsmbrfQ_t8s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "206838633666-5go7gpsd5gdnf23r3n2q7q9ktsjtgipg.apps.googleusercontent.com",
+              "client_id": "1097724406676-b4kf4rr3plc9c9qju8pdfh22mjlsffa9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
