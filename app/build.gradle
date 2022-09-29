@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        buildConfigField("String", "FIREBASE_ADDRESS", '"https://sweetect-default-rtdb.asia-southeast1.firebasedatabase.app"')
+        buildConfigField("String", "FIREBASE_ADDRESS", '"https://sweetectapp-default-rtdb.asia-southeast1.firebasedatabase.app"')
         applicationId "com.daftech.sweetectapp"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 

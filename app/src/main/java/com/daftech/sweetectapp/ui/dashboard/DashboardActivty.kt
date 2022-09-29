@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,8 +27,6 @@ import com.daftech.sweetectapp.core.adapter.HistoryAdapter
 import com.daftech.sweetectapp.core.utils.ViewModelFactory
 import com.daftech.sweetectapp.databinding.ActivityDashboardBinding
 import com.daftech.sweetectapp.ui.detail.DetailActivity
-import com.daftech.sweetectapp.ui.main.MainActivity
-import com.daftech.sweetectapp.ui.onboarding.ViewPagerFragment
 import com.daftech.sweetectapp.ui.signin.SignInActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
