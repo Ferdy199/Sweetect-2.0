@@ -3,6 +3,7 @@ package com.daftech.sweetectapp.core.utils
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.daftech.sweetectapp.core.di.Injection
 import com.daftech.sweetectapp.core.repository.FoodRepository
 import com.daftech.sweetectapp.ui.dashboard.DashboardViewModel
@@ -24,8 +25,8 @@ class ViewModelFactory private constructor(private val mFoodRepository: FoodRepo
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when{
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(mFoodRepository) as T

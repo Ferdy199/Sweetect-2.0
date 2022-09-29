@@ -54,6 +54,14 @@
     <string name="txt_username">Username</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="lengkung_henle">Lengkung Henle</string>
+    <string name="signUp_header">header</string>
+    <string name="please_fill_register_form">PLEASE FILL REGISTER FORM</string>
+    <string name="type_your_email">Type your Email</string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="retype_your_password">Retype Your Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_registered_sign_in">Already Registered , Sign In !</string>
 
 
 </resources>
