@@ -79,7 +79,7 @@
             <Button
                 android:id="@+id/btn_gallery"
                 style="@style/ToogleButtonWithIconOnly"
-                android:layout_width="325dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/muli"

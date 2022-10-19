@@ -1,137 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/soft_grey"
+    android:orientation="vertical"
     tools:context=".ui.detail.DetailActivity">
 
-    <TextView
-        android:id="@+id/food_name"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10dp"
-        android:fontFamily="@font/rubik"
-        android:text="@string/your_food"
-        android:textAlignment="center"
-        android:textColor="@color/dark_blue"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/food_photo"
-        android:layout_width="300dp"
-        android:layout_height="225dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_name"
-        android:src="@drawable/logosweetect"
-        android:contentDescription="@string/food_image" />
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/rubik"
+            android:text="@string/your_food"
+            android:textAlignment="center"
+            android:textColor="@color/dark_blue"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnPredicted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/predicted"
-        android:fontFamily="@font/muli"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_desc"
-        android:backgroundTint="@color/hard_pink"
-        android:visibility="visible"/>
+        <ImageView
+            android:id="@+id/food_photo"
+            android:layout_width="300dp"
+            android:layout_height="225dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="@string/food_image"
+            android:src="@drawable/logosweetect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_name" />
 
-    <Button
-        android:id="@+id/btn_select_take"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:drawableEnd="@drawable/ic_select"
-        android:fontFamily="@font/muli"
-        android:text="@string/reselect_retake_food"
-        android:textSize="14sp"
-        android:visibility="gone"
-        android:backgroundTint="@color/hard_pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progbar" />
+        <Button
+            android:id="@+id/btnPredicted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/hard_pink"
+            android:fontFamily="@font/muli"
+            android:text="@string/predicted"
+            android:textSize="14sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_desc" />
 
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:backgroundTint="@color/hard_pink"
-        android:drawableEnd="@drawable/ic_select"
-        android:fontFamily="@font/muli"
-        android:text="Save"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_select_take" />
+        <Button
+            android:id="@+id/btn_select_take"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/hard_pink"
+            android:drawableEnd="@drawable/ic_select"
+            android:fontFamily="@font/muli"
+            android:text="@string/reselect_retake_food"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/calorie_chart" />
 
-    <TextView
-        android:id="@+id/food_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="48dp"
-        android:fontFamily="@font/muli"
-        android:text="@string/please_select_predict_button_for_showing_your_sugar_and_calories"
-        android:textAlignment="center"
-        android:textColor="@color/dark_grey"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_photo" />
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_select"
+            android:fontFamily="@font/muli"
+            android:text="Save"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_select_take"
+            app:layout_constraintVertical_bias="0.186" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/calorie_chart"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:visibility="gone"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_select_take"
-        app:layout_constraintEnd_toStartOf="@+id/sugar_chart"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_desc" />
+        <TextView
+            android:id="@+id/food_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="48dp"
+            android:fontFamily="@font/muli"
+            android:text="@string/please_select_predict_button_for_showing_your_sugar_and_calories"
+            android:textAlignment="center"
+            android:textColor="@color/dark_grey"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_photo" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/sugar_chart"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginVertical="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/btn_select_take"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/food_desc" />
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/calorie_chart"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@+id/sugar_chart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_desc" />
 
-    <ProgressBar
-        android:id="@+id/progbar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-50dp"
-        android:progressBackgroundTint="@color/hard_pink"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPredicted"/>
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/sugar_chart"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/food_desc" />
 
+        <ProgressBar
+            android:id="@+id/progbar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-50dp"
+            android:progressBackgroundTint="@color/hard_pink"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPredicted" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
